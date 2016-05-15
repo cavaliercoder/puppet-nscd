@@ -67,7 +67,7 @@ finally start the nscd service.
     - [Class: nscd::install](#class-nscdinstall)
     - [Class: nscd::params](#class-nscdparams)
     - [Class: nscd::service](#class-nscdservice)
-    - [Class: nscd::service_defaults](#class-nscdservicedefaults)
+    - [Class: nscd::service_defaults](#class-nscdservice_defaults)
 - [**Public defined types**](#public-defined-types)
     - [Defined type: nscd::cache](#defined-type-nscdcache)
 
@@ -220,9 +220,12 @@ Manages the nscd daemon and runtime user account.
 
 #### Class: `nscd::service_defaults`
 
+Defines default `::nscd::cache` configurations for the targeted operating
+system.
+
 ### Public defined types
 
-#### Defined class: `nscd::cache`
+#### Defined type: `nscd::cache`
 
 Defines the configuration for a supported service cache.
 
