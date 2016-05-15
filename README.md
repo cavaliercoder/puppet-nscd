@@ -60,6 +60,17 @@ finally start the nscd service.
 
 ## Reference
 
+- [**Public classes**](#public-classes)
+    - [Class: nscd](#class-nscd)
+- [**Private classes**](#private-classes)
+    - [Class: nscd::config](#class-nscdconfig)
+    - [Class: nscd::install](#class-nscdinstall)
+    - [Class: nscd::params](#class-nscdparams)
+    - [Class: nscd::service](#class-nscdservice)
+    - [Class: nscd::service_defaults](#class-nscdservicedefaults)
+- [**Public defined types**](#public-defined-types)
+    - [Defined type: nscd::cache](#defined-type-nscdcache)
+
 ### Public classes
 
 #### Class: `nscd`
@@ -114,7 +125,8 @@ Default: 'installed'.
 ##### `package_manage`
 
 Determines whether the `nscd` package will be installed and managed. Set to
-`false` if you wish to manually manage the installation. Default: `true`.
+`false` if you wish to manually manage the installation. Valid options: Boolean.
+Default: true.
 
 ##### `package_name`
 
@@ -216,11 +228,11 @@ Defines the configuration for a supported service cache.
 
 **Parameters within `nscd::cache`:**
 
-#### `name`
+##### `name`
 
 Sets the name of the service to be configured.
 
-#### `auto_propagate`
+##### `auto_propagate`
 
 When set to `false` for `passwd` or `group` service, then the `.byname` requests
 are not added to `passwd.byuid` or `group.bygid` cache. This can help with
