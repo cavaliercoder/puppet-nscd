@@ -1,0 +1,12 @@
+# !!! This file is managed by Puppet
+
+	logfile			<%= @log_file %>
+	debug-level		<%= @debug_level %>
+	threads			<%= @threads %>
+	max-threads		<%= @max_threads %>
+	server-user		<%= @service_user %>
+<% if @stat_user %>	stat-user		<%= @stat_user %>
+<% end -%>
+	reload-count		<%= @reload_count %>
+	paranoia		<%= @paranoia ? 'yes' : 'no' %>
+	restart-interval	<%= @restart_interval %>

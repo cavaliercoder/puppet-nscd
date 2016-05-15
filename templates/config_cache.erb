@@ -1,0 +1,11 @@
+
+	enable-cache		<%= @name %>	<%= @enable ? 'yes' : 'no' %>
+ 	positive-time-to-live	<%= @name %>	<%= @positive_ttl %>
+ 	negative-time-to-live	<%= @name %>	<%= @negative_ttl %>
+	suggested-size		<%= @name %>	<%= @suggested_size %>
+	check-files		<%= @name %>	<%= @check_files ? 'yes' : 'no' %>
+	persistent		<%= @name %>	<%= @persistent ? 'yes' : 'no' %>
+	shared			<%= @name %>	<%= @shared ? 'yes' : 'no' %>
+	max-db-size		<%= @name %>	<%= @max_db_size %>
+<% if @auto_propagate %>	auto-propagate		<%= @name %>	<%= @auto_propagate ? 'yes' : 'no' %>
+<% end -%>
