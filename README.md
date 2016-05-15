@@ -58,6 +58,33 @@ This will install the nscd package, configure daemon defaults, enable and
 configure service caches as per the defaults for your operating system and
 finally start the nscd service.
 
+### Install and start nscd with custom service cache configurations
+
+```puppet
+class { '::nscd' : }
+
+nscd::cache { 'passwd' : 
+  positive_ttl   => 600,
+  negative_ttl   => 20,
+  persistent     => true,
+  shared         => true,
+  auto_propagate => true,
+}
+
+nscd::cache { 'group' : 
+  positive_ttl   => 3600,
+  negative_ttl   => 60,
+  persistent     => true,
+  shared         => true,
+  auto_propagate => true,
+}
+
+```
+
+This will install the nscd package, configure daemon defaults, enable and
+configure service caches for `passwd` and `group` and finally start the nscd
+service.
+
 ## Reference
 
 - [**Public classes**](#public-classes)
