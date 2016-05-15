@@ -1,7 +1,7 @@
 # PRIVATE CLASS: do not include directly
 class nscd::config inherits nscd {
-  if $config_manage {
-    concat { $config_file :
+  if $::nscd::config_manage {
+    concat { $::nscd::config_file :
       ensure  => present,
       owner   => 'root',
       group   => 'root',
@@ -11,10 +11,10 @@ class nscd::config inherits nscd {
       seltype => 'etc_t',
     }
 
-    concat::fragment { 'config_header_fragment' : 
-      target  => $config_file,
+    concat::fragment { 'config_header_fragment' :
+      target  => $::nscd::config_file,
       content => template("${module_name}/config_header.erb"),
       order   => '00',
     }
-  }  
+  }
 }

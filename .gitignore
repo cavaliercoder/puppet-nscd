@@ -1,4 +1,5 @@
 *.deb
 *.lock
 .vagrant/
+pkg/
 Vagrantfile
