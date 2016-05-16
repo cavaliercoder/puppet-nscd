@@ -1,6 +1,6 @@
 {
   "name": "cavaliercoder/nscd",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Ryan Armstrong",
   "summary": "Install, configure and manage Name Service Cache Daemon",
   "license": "Apache-2.0",
