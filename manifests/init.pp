@@ -13,7 +13,7 @@ class nscd (
   $service_user     = $::nscd::params::service_user,
   $service_user_uid = $::nscd::params::service_user_uid,
   $service_user_gid = $::nscd::params::service_user_gid,
-  
+
   $config_manage    = $::nscd::params::config_manage,
   $config_file      = $::nscd::params::config_file,
 

@@ -15,7 +15,7 @@ class nscd::service_defaults {
     shared         => true,
     auto_propagate => true,
   }
-  
+
   nscd::cache { 'hosts' :
     positive_ttl => 3600,
     negative_ttl => 20,
