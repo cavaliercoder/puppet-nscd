@@ -17,7 +17,8 @@ class nscd::service {
         ensure  => present,
         uid     => $::nscd::service_user_uid,
         comment => 'NSCD Daemon',
-        home    => '',
+        home    => '/',
+        system  => true,
         shell   => $::nscd::service_user_shell,
         before  => Service[$::nscd::service_name],
       }
