@@ -1,51 +1,61 @@
 # See README.md for usage information
+#
+# @param package_manage
+# @param package_name
+# @param package_ensure
+# @param service_manage
+# @param service_defaults
+# @param service_name
+# @param service_ensure
+# @param service_enable
+# @param service_user_manage
+# @param service_user
+# @param service_user_uid
+# @param service_user_gid
+# @param config_manage
+# @param config_file
+# @param log_file
+# @param debug_level
+# @param threads
+# @param max_threads
+# @param stat_user
+# @param reload_count
+# @param paranoia
+# @param restart_interval
+#
 class nscd (
-  $package_manage   = $::nscd::params::package_manage,
-  $package_name     = $::nscd::params::package_name,
-  $package_ensure   = $::nscd::params::package_ensure,
-
-  $service_manage   = $::nscd::params::service_manage,
-  $service_defaults = $::nscd::params::service_defaults,
-  $service_name     = $::nscd::params::service_name,
-  $service_ensure   = $::nscd::params::service_ensure,
-  $service_enable   = $::nscd::params::service_enable,
-  $service_user_manage = $::nscd::params::service_user_manage,
-  $service_user     = $::nscd::params::service_user,
-  $service_user_uid = $::nscd::params::service_user_uid,
-  $service_user_gid = $::nscd::params::service_user_gid,
-
-  $config_manage    = $::nscd::params::config_manage,
-  $config_file      = $::nscd::params::config_file,
-
-  $log_file         = $::nscd::params::log_file,
-  $debug_level      = $::nscd::params::debug_level,
-  $threads          = $::nscd::params::threads,
-  $max_threads      = $::nscd::params::max_threads,
-  $stat_user        = $::nscd::params::stat_user,
-  $reload_count     = $::nscd::params::reload_count,
-  $paranoia         = $::nscd::params::paranoia,
-  $restart_interval = $::nscd::params::restart_interval,
+  Boolean $package_manage                = $nscd::params::package_manage,
+  String $package_name                   = $nscd::params::package_name,
+  String $package_ensure                 = $nscd::params::package_ensure,
+  Boolean $service_manage                = $nscd::params::service_manage,
+  Boolean $service_defaults              = $nscd::params::service_defaults,
+  String $service_name                   = $nscd::params::service_name,
+  String $service_ensure                 = $nscd::params::service_ensure,
+  Boolean $service_enable                = $nscd::params::service_enable,
+  Boolean $service_user_manage           = $nscd::params::service_user_manage,
+  String $service_user                   = $nscd::params::service_user,
+  Integer $service_user_uid              = $nscd::params::service_user_uid,
+  Integer $service_user_gid              = $nscd::params::service_user_gid,
+  Boolean $config_manage                 = $nscd::params::config_manage,
+  String $config_file                    = $nscd::params::config_file,
+  String $log_file                       = $nscd::params::log_file,
+  Integer $debug_level                   = $nscd::params::debug_level,
+  Integer $threads                       = $nscd::params::threads,
+  Integer $max_threads                   = $nscd::params::max_threads,
+  Optional[String] $stat_user            = $nscd::params::stat_user,
+  Variant[Integer, String] $reload_count = $nscd::params::reload_count,
+  Boolean $paranoia                      = $nscd::params::paranoia,
+  Integer $restart_interval              = $nscd::params::restart_interval,
 ) inherits nscd::params {
-  validate_absolute_path($config_file)
-  validate_absolute_path($log_file)
-  validate_integer($debug_level, '', 0)
-  validate_integer($threads, '', 1)
-  validate_integer($max_threads, '', $threads)
-  if is_string($reload_count) {
-    validate_re($reload_count, '^unlimited$')
-  } else {
-    validate_integer($reload_count)
-  }
-  validate_bool($paranoia)
-  validate_integer($restart_interval, '', 0)
+  contain 'nscd::install'
+  contain 'nscd::config'
+  contain 'nscd::service'
 
-  anchor { '::nscd::begin' : } ->
-  class { '::nscd::install' : } ->
-  class { '::nscd::config' : } ->
-  class { '::nscd::service' : } ->
-  anchor { '::nscd::end' : }
+  Class['nscd::install']
+  -> Class['nscd::config']
+  ~> Class['nscd::service']
 
   if $service_defaults {
-    class { '::nscd::service_defaults' : }
+    class { 'nscd::service_defaults' : }
   }
 }

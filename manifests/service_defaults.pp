@@ -33,7 +33,7 @@ class nscd::service_defaults {
   # netgroup caching is known-broken, so disable it in the default config,
   # see: https://bugs.launchpad.net/ubuntu/+source/eglibc/+bug/1068889
   nscd::cache { 'netgroup' :
-    enable       => $::osfamily != 'Debian',
+    enable       => $facts['os']['family'] != 'Debian',
     positive_ttl => 28800,
     negative_ttl => 20,
     persistent   => true,
