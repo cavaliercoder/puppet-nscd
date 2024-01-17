@@ -29,13 +29,6 @@ define nscd::cache (
     fail('nscd::cache was defined but nscd::config_manage is false')
   }
 
-  validate_re($name, '^(passwd|group|hosts|services|netgroup)$')
-
-  if $auto_propagate {
-    validate_re($name, '^(hosts|passwd|group)$')
-    validate_bool($auto_propagate)
-  }
-
   concat::fragment { "config_${name}_fragment" :
     target  => $nscd::config_file,
     content => template("${module_name}/config_cache.erb"),
