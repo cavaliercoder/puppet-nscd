@@ -1,33 +1,32 @@
-# PRIVATE CLASS: do not include directly
 class nscd::params {
-  $package_manage   = true
-  $package_name     = 'nscd'
-  $package_ensure   = 'installed'
+  $package_manage      = true
+  $package_name        = 'nscd'
+  $package_ensure      = 'installed'
 
-  $service_manage   = true
-  $service_defaults = false
-  $service_name     = 'nscd'
-  $service_ensure   = 'running'
-  $service_enable   = true
+  $service_manage      = true
+  $service_defaults    = false
+  $service_name        = 'nscd'
+  $service_ensure      = 'running'
+  $service_enable      = true
 
   $service_user_manage = true
-  $service_user     = 'nscd'
-  $service_user_uid = 28
-  $service_user_gid = 28
+  $service_user        = 'nscd'
+  $service_user_uid    = 28
+  $service_user_gid    = 28
 
-  $config_manage    = true
-  $config_file      = '/etc/nscd.conf'
+  $config_manage       = true
+  $config_file         = '/etc/nscd.conf'
 
-  $log_file         = '/var/log/nscd.log'
-  $debug_level      = 0
-  $threads          = 4
-  $max_threads      = 32
-  $stat_user        = undef
-  $reload_count     = 5
-  $paranoia         = false
-  $restart_interval = 3600
+  $log_file            = '/var/log/nscd.log'
+  $debug_level         = 0
+  $threads             = 4
+  $max_threads         = 32
+  $stat_user           = undef
+  $reload_count        = 5
+  $paranoia            = false
+  $restart_interval    = 3600
 
-  case $::osfamily {
+  case $facts['os']['family'] {
     'Debian': {
       $service_user_shell = '/usr/sbin/nologin'
     }

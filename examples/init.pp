@@ -9,6 +9,6 @@
 # Learn more about module testing here:
 # https://docs.puppetlabs.com/guides/tests_smoke.html
 #
-class { '::nscd' :
+class { 'nscd' :
   service_defaults => true,
 }
